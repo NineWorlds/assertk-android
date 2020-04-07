@@ -2,6 +2,7 @@ package us.nineworlds.assertk.android
 
 import android.graphics.drawable.Drawable
 import android.view.View
+import android.view.ViewParent
 import android.view.animation.Animation
 import assertk.Assert
 import assertk.assertions.isEqualTo
@@ -10,28 +11,286 @@ import assertk.assertions.isSameAs
 import assertk.assertions.support.expected
 
 fun Assert<View>.hasAlpha(expectedValue: Float) = given { actual ->
-  isNotNull()
   val actualAlpha = actual.alpha
   if (actualAlpha == expectedValue) return@given
   expected("Expected alpha $expectedValue but was $actualAlpha")
 }
 
 fun Assert<View>.hasAnimation(animation: Animation) = given { actual ->
-  isNotNull()
   val actualAnimation = actual.animation
 
   assertThat(actualAnimation).isSameAs(animation)
 }
 
 fun Assert<View>.hasBackground(background: Drawable) = given { actual ->
-  isNotNull()
   val actualBackground = actual.background
   assertThat(actualBackground).isSameAs(background)
 }
 
 fun Assert<View>.hasBaseline(baseline: Int) = given { actual ->
-  isNotNull()
   val actualBaseline = actual.baseline
   assertThat(actualBaseline).isEqualTo(baseline)
+}
+
+fun Assert<View>.hasBottom(bottom: Int) = given { actual ->
+  val actualBottom = actual.bottom
+
+  assertThat(actualBottom).isEqualTo(bottom)
+}
+
+fun Assert<View>.hasContentDescription(contentDescription: CharSequence) = given { actual ->
+  val actualContentDescription = actual.contentDescription
+  if (actualContentDescription == contentDescription) return@given
+  expected("Expected content description <$contentDescription> but was <$actualContentDescription>")
+}
+
+fun Assert<View>.hasContentDescription(resId: Int) = given { actual ->
+  return hasContentDescription(actual.context.getString(resId))
+}
+
+fun Assert<View>.hasDrawingCacheBackgroundColor(color: Int) = given { actual ->
+  val actualColor = actual.drawingCacheBackgroundColor
+  if (actualColor == color) return@given
+  expected("Expected drawing cache background color <$color> but was <$actualColor>")
+}
+
+fun Assert<View>.hasDrawingCacheQuality(quality: Int) = given { actual ->
+  val actualQuality = actual.drawingCacheQuality
+  if (actualQuality == quality) return@given
+  expected("Expected drawing cache quality <$quality> but was <$actualQuality>")
+}
+
+fun Assert<View>.hasElevation(elevation: Float) = given { actual ->
+  val actualElevation = actual.elevation
+  if (actualElevation == elevation) return@given
+  expected("Expected elevation <$elevation> but was <$actualElevation>")
+}
+
+fun Assert<View>.hasHeight(height: Int) = given { actual ->
+  val actualHeight = actual.height
+  if (actualHeight == height) return@given
+  expected("Expected height <$height> but was <$actualHeight>")
+}
+
+fun Assert<View>.hasHorizontalFadingEdgeLength(length: Int) = given { actual ->
+  val actualLength = actual.horizontalFadingEdgeLength
+  if (actualLength == length) return@given
+  expected("Expected horizontal fading edge length <$length> but was <$actualLength>")
+}
+
+fun Assert<View>.hasId(id: Int) = given { actual ->
+  val actualId = actual.id
+  if (actualId == id) return@given
+  expected("Expected id <$id> but was <$actualId>")
+}
+
+fun Assert<View>.isKeepingScreenOn() = given { actual ->
+  if (actual.keepScreenOn) return@given
+  expected("Expected to be keeping screen on but was not.")
+}
+
+fun Assert<View>.isNotKeepingScreenOn() = given { actual ->
+  if (!actual.keepScreenOn) return@given
+  expected("Expected to not be keeping screen on but was.")
+}
+
+fun Assert<View>.hasLabelFor(id: Int) = given { actual ->
+  if (actual.labelFor == id) return@given
+  expected("Expected to have label for ID <$id> but was <${actual.labelFor}>")
+}
+
+fun Assert<View>.hasLayerType(type: Int) = given { actual ->
+  if (actual.layerType == type) return@given
+  expected("Expected layer type <$type> but was <${actual.layerType}>")
+}
+
+fun Assert<View>.hasLayoutDirection(direction: Int) = given { actual ->
+  if (actual.layoutDirection == direction) return@given
+  expected("Expected layout direction <$direction> but was <${actual.layoutDirection}>")
+}
+
+fun Assert<View>.hasLeft(left: Int) = given { actual ->
+  if (actual.left == left) return@given
+  expected("Expected left <$left> but was <${actual.left}>")
+}
+
+fun Assert<View>.hasMeasuredHeight(height: Int) = given { actual ->
+  if (actual.measuredHeight == height) return@given
+  expected("Expected measured height <$height> but was <${actual.height}>")
+}
+
+fun Assert<View>.hasMeasuredHeightAndState(heightState: Int) = given { actual ->
+  if (actual.measuredHeightAndState == heightState) return@given
+  expected("Expected measured height and state <$heightState> but was <${actual.measuredHeightAndState}>")
+}
+
+fun Assert<View>.hasMeasuredState(state: Int) = given { actual ->
+  if (actual.measuredState == state) return@given
+  expected("Expected measured state <$state> but was <${actual.measuredState}>")
+}
+
+fun Assert<View>.hasMeasuredWidth(width: Int) = given { actual ->
+  if (actual.measuredWidth == width) return@given
+  expected("Expected measured width <$width> but was <${actual.measuredWidth}>")
+}
+
+fun Assert<View>.hasMeasuredWidthAndState(widthState: Int) = given { actual ->
+  if (actual.measuredWidthAndState == widthState) return@given
+  expected("Expected measured width and state <$widthState> but was <${actual.measuredWidthAndState}>")
+}
+
+fun Assert<View>.hasMinimumHeight(height: Int) = given { actual ->
+  if (actual.minimumHeight == height) return@given
+  expected("Expected minimum height <$height> but was <${actual.minimumHeight}>")
+}
+
+fun Assert<View>.hasMinimumWidth(width: Int) = given { actual ->
+  if (actual.minimumWidth == width) return@given
+  expected("Expected minimum width <$width> but was <${actual.minimumWidth}>")
+}
+
+fun Assert<View>.hasNextFocusDownId(id: Int) = given { actual ->
+  if (actual.nextFocusDownId == id) return@given
+  expected("Expected next focus down ID <$id> but was <${actual.nextFocusDownId}>")
+}
+
+fun Assert<View>.hasNextFocusForwardId(id: Int) = given { actual ->
+  if (actual.nextFocusForwardId == id) return@given
+  expected("Expected next focus forward ID <$id> but was <${actual.nextFocusForwardId}>")
+}
+
+fun Assert<View>.hasNextFocusLeftId(id: Int) = given { actual ->
+  if (actual.nextFocusLeftId == id) return@given
+  expected("Expected next focus left ID <$id> but was <${actual.nextFocusLeftId}>")
+}
+
+fun Assert<View>.hasNextFocusRightId(id: Int) = given { actual ->
+  if (actual.nextFocusRightId == id) return@given
+  expected("Expected next focus right ID <$id> but was <${actual.nextFocusRightId}>")
+}
+
+fun Assert<View>.hasNextFocusUpId(id: Int) = given { actual ->
+  if (actual.nextFocusUpId == id) return@given
+  expected("Expected next focus up ID <$id> but was <${actual.nextFocusUpId}")
+}
+
+fun Assert<View>.hasOverScrollMode(mode: Int) = given { actual ->
+  if (actual.overScrollMode == mode) return@given
+  expected("Expected over scroll mode <$mode> but was <${actual.overScrollMode}>")
+}
+
+fun Assert<View>.hasPaddingBottom(padding: Int) = given { actual ->
+  if (actual.paddingBottom == padding) return@given
+  expected("Expected padding bottom <$padding> but was <${actual.paddingBottom}>")
+}
+
+fun Assert<View>.hasPaddingEnd(padding: Int) = given { actual ->
+  if (actual.paddingEnd == padding) return@given
+  expected("Expected padding end <$padding> but was <${actual.paddingEnd}>")
+}
+
+fun Assert<View>.hasPaddingLeft(padding: Int) = given { actual ->
+  if (actual.paddingLeft == padding) return@given
+  expected("Expected padding left <$padding> but was <${actual.paddingLeft}>")
+}
+
+fun Assert<View>.hasPaddingRight(padding: Int) = given { actual ->
+  if (actual.paddingRight == padding) return@given
+  expected("Expected padding right <$padding> but was <${actual.paddingRight}>")
+}
+
+fun Assert<View>.hasPaddingStart(padding: Int) = given { actual ->
+  if (actual.paddingStart == padding) return@given
+  expected("Expected padding start <$padding> but was <${actual.paddingStart}>")
+}
+
+fun Assert<View>.hasPaddingTop(padding: Int) = given { actual ->
+  if (actual.paddingTop == padding) return@given
+  expected("Expected padding top <$padding> but was <${actual.paddingTop}>")
+}
+
+fun Assert<View>.hasParent(parent: ViewParent) = given { actual ->
+  if (actual.parent == parent) return@given
+  expected("Expected parent <$parent> but was <${actual.parent}>")
+}
+
+fun Assert<View>.hasParentForAccessibility(parent: ViewParent) = given { actual ->
+  if (actual.parentForAccessibility == parent) return@given
+  expected("Expected parent for accessibility <$parent> but was <${actual.parentForAccessibility}>")
+}
+
+fun Assert<View>.hasPivotX(pivotx: Float) = given { actual ->
+  if (actual.pivotX == pivotx) return@given
+  expected("Expected x pivot <$pivotx> but was <${actual.pivotX}>")
+}
+
+fun Assert<View>.hasPivotY(pivoty: Float) = given { actual ->
+  if (actual.pivotY == pivoty) return@given
+  expected("Expected y pivot <$pivoty> but was <${actual.pivotY}>")
+}
+
+fun Assert<View>.hasRight(right: Int) = given { actual ->
+  if (actual.right == right) return@given
+  expected("Expected right <$right> but was <${actual.right}")
+}
+
+fun Assert<View>.hasRootView(view: View) = given { actual ->
+  if (actual.rootView == view) return@given
+  expected("Expected root view <$view> but was <${actual.rootView}>")
+}
+
+fun Assert<View>.hasRotation(rotation: Float) = given { actual ->
+  if (actual.rotation == rotation) return@given
+  expected("Expected rotation <$rotation> but was <${actual.rotation}>")
+}
+
+fun Assert<View>.hasRotationX(rotationx: Float) = given { actual ->
+  if (actual.rotationX == rotationx) return@given
+  expected("Expected x rotation <$rotationx> but was <${actual.rotationX}>")
+}
+
+fun Assert<View>.hasRotationY(rotationy: Float) = given { actual ->
+  if (actual.rotationY == rotationy) return@given
+  expected("Expected y rotation <$rotationy> but was <${actual.rotationY}>")
+}
+
+fun Assert<View>.hasScaleX(scaleX: Float) = given { actual ->
+  if (actual.scaleX == scaleX) return@given
+  expected("Expected x scale <$scaleX> but was <${actual.scaleX}>")
+}
+
+fun Assert<View>.hasScaleY(scaleY: Float) = given { actual ->
+  if (actual.scaleY == scaleY) return@given
+  expected("Expected y scale <$scaleY> but was <${actual.scaleY}")
+}
+
+fun Assert<View>.hasScrollBarDefaultDelayBeforeFade(fade: Int) = given { actual ->
+  if (actual.scrollBarDefaultDelayBeforeFade == fade) return@given
+  expected("Expected scroll bar default delay before fade <$fade> but was <${actual.scrollBarDefaultDelayBeforeFade}>")
+}
+
+fun Assert<View>.hasScrollBarFadeDuration(duration: Int) = given { actual ->
+  if (actual.scrollBarFadeDuration == duration) return@given
+  expected("Expected scroll bar duration <$duration> but was <${actual.scrollBarFadeDuration}")
+}
+
+fun Assert<View>.hasScrollBarSize(size: Int) = given { actual ->
+  if (actual.scrollBarSize == size) return@given
+  expected("Expected scroll bar size <$size> but was <${actual.scrollBarSize}")
+}
+
+fun Assert<View>.hasScrollBarStyle(style: Int) = given { actual ->
+  if (actual.scrollBarStyle == style) return@given
+  expected("Expected scroll bar style <$style> but was <${actual.scrollBarStyle}>")
+}
+
+fun Assert<View>.hasScrollX(scroll: Int) = given { actual ->
+  if (actual.scrollX == scroll) return@given
+  expected("Expected x scroll <$scroll> but was <${actual.scrollX}>")
+}
+
+fun Assert<View>.hasScrollY(scroll: Int) = given { actual ->
+  if (actual.scrollY == scroll) return@given
+  expected("Expected y scroll <$scroll> but was <${actual.scrollY}>")
 }
 
