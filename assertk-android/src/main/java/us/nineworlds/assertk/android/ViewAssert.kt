@@ -2,13 +2,14 @@ package us.nineworlds.assertk.android
 
 import android.graphics.drawable.Drawable
 import android.view.View
+import android.view.View.*
 import android.view.ViewParent
 import android.view.animation.Animation
 import assertk.Assert
 import assertk.assertions.isEqualTo
-import assertk.assertions.isNotNull
 import assertk.assertions.isSameAs
 import assertk.assertions.support.expected
+import us.nineworlds.assertk.util.BitmaskUtils
 
 fun Assert<View>.hasAlpha(expectedValue: Float) = given { actual ->
   val actualAlpha = actual.alpha
@@ -292,5 +293,90 @@ fun Assert<View>.hasScrollX(scroll: Int) = given { actual ->
 fun Assert<View>.hasScrollY(scroll: Int) = given { actual ->
   if (actual.scrollY == scroll) return@given
   expected("Expected y scroll <$scroll> but was <${actual.scrollY}>")
+}
+
+fun Assert<View>.hasSolidColor(color: Int) = given { actual ->
+  if (actual.solidColor == color) return@given
+  expected("Expected solid color <$color> but was <${actual.solidColor}>")
+}
+
+fun Assert<View>.hasSystemUiVisibility(visibility: Int) = given { actual ->
+  if (actual.systemUiVisibility == visibility) return@given
+  expected("Expected system UI visibility <$visibility> but was <${actual.systemUiVisibility}>")
+}
+
+fun Assert<View>.hasTag(key: Int, tag: Any) = given { actual ->
+  val actualObject = actual.getTag(key)
+  if (actualObject == tag) return@given
+  expected("Expected tag <$tag> at key <$key> but was <$actualObject>")
+}
+
+fun Assert<View>.hasTag(tag: Any) = given { actual ->
+  val actualObject = actual.tag
+  if (actualObject == tag) return@given
+  expected("Expected tag <$tag> but was <$actualObject>")
+}
+
+fun Assert<View>.hasTextAlignment(textAlignment: Int) = given { actual ->
+  if (actual.textAlignment == textAlignment) return@given
+  expected("Expected text alignment <$textAlignment> but was <${actual.textAlignment}>")
+}
+
+fun Assert<View>.hasTextDirection(textDirection: Int) = given { actual ->
+  if (actual.textDirection == textDirection) return@given
+  expected("Expected text direction <$textDirection> but was <${actual.textDirection}>")
+}
+
+fun Assert<View>.hasTop(top: Int) = given {actual ->
+  if (actual.top == top) return@given
+  expected("Expected top <$top> but was <${actual.top}>")
+}
+
+fun Assert<View>.hasTranslationX(translation: Float) = given { actual ->
+  if (actual.translationX == translation) return@given
+  expected("Expected x translation <$translation> but was <${actual.translationX}>")
+}
+
+fun Assert<View>.hasTranslationY(translation: Float) = given { actual ->
+  if (actual.translationY == translation) return@given
+  expected("Expected y translation <$translation> but was <${actual.translationY}>")
+}
+
+fun Assert<View>.hasTranslationZ(translation: Float) = given { actual ->
+  if (actual.translationZ == translation) return@given
+  expected("Expected z translation <$translation> but was <${actual.translationZ}>")
+}
+
+fun Assert<View>.hasVerticalFadingEdgeLength(fadingEdgeLength: Int) = given { actual ->
+  if (actual.verticalFadingEdgeLength == fadingEdgeLength) return@given
+  expected("Expected vertical fading edge length <$fadingEdgeLength> but was <${actual.verticalFadingEdgeLength}>")
+}
+
+fun Assert<View>.hasVerticalScrollbarPosition(position: Int) = given { actual ->
+  if (actual.verticalScrollbarPosition == position) return@given
+  expected("Expected vertical scroll bar position <$position> but was <${actual.verticalScrollbarPosition}>")
+}
+
+fun Assert<View>.hasVerticalScrollbarWidth(width: Int) = given { actual ->
+  if (actual.verticalScrollbarWidth == width) return@given
+  expected("Expected veritical scroll bar width <$width> but was <${actual.verticalScrollbarWidth}>")
+}
+
+fun Assert<View>.hasVisiblity(visibility: Int) = given { actual ->
+  if (actual.visibility == visibility) return@given
+  expected("Expected visibility <$visibility> but was <${actual.visibility}>")
+}
+
+fun Assert<View>.isVisible() = given { actual ->
+  if (actual.visibility == VISIBLE) return@given
+  expected("Expected to be visible but was ${visibilityToString(actual.visibility)}")
+}
+
+fun visibilityToString(visibility: Int): String {
+  return BitmaskUtils.buildNamedValueString(visibility.toLong())
+    .value(VISIBLE.toLong(), "visible")
+    .value(INVISIBLE.toLong(), "invisible")
+    .value(GONE.toLong(), "gone")
+    .get()
 }
 
