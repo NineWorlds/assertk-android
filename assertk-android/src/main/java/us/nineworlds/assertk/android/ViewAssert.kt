@@ -372,6 +372,163 @@ fun Assert<View>.isVisible() = given { actual ->
   expected("Expected to be visible but was ${visibilityToString(actual.visibility)}")
 }
 
+fun Assert<View>.isNotVisible() = given { actual ->
+  if (actual.visibility != VISIBLE) return@given
+  expected("Expected to not visible but was ${visibilityToString(actual.visibility)}")
+}
+
+fun Assert<View>.isInvisible() = given { actual ->
+  if (actual.visibility == INVISIBLE) return@given
+  expected("Expected to be invisible but was ${visibilityToString(actual.visibility)}")
+}
+
+fun Assert<View>.isNotInVisible() = given { actual ->
+  if (actual.visibility != INVISIBLE) return@given
+  expected("Expected to be not invisible but was ${visibilityToString(actual.visibility)}")
+}
+
+fun Assert<View>.isGone() = given { actual ->
+  if (actual.visibility == GONE) return@given
+  expected("Expected to be gone but was ${visibilityToString(actual.visibility)}")
+}
+
+fun Assert<View>.isNotGone() = given { actual ->
+  if (actual.visibility != GONE) return@given
+  expected("Expected to be not gone but was ${visibilityToString(actual.visibility)}")
+}
+
+fun Assert<View>.hasWidth(width: Int) = given { actual ->
+  if (actual.width == width) return@given
+  expected("Expected width <$width> but was <${actual.width}>")
+}
+
+fun Assert<View>.hasWindowVisibility(visibility: Int) = given { actual ->
+  if (actual.windowVisibility == visibility) return@given
+  expected("Expected window visibility <${visibilityToString(visibility)}> but was <${visibilityToString(actual.windowVisibility)}>")
+}
+
+fun Assert<View>.hasX(x: Float) = given { actual ->
+  if (actual.x == x) return@given
+  expected("Expected x <$x> but was <${actual.x}>")
+}
+
+fun Assert<View>.hasY(y: Float) = given { actual ->
+  if (actual.y == y) return@given
+  expected("Expected y <$y> but was <${actual.y}>")
+}
+
+fun Assert<View>.hasZ(z: Float) = given { actual ->
+  if (actual.z == z) return@given
+  expected("Expected z <$z> but was <${actual.z}>")
+}
+
+fun Assert<View>.hasFocus() = given { actual ->
+  if (actual.hasFocus()) return@given
+  expected("Expected to have focus but was not focused")
+}
+
+fun Assert<View>.hasNoFocus() = given { actual ->
+  if (!actual.hasFocus()) return@given
+  expected("Expected to not have focus but was focused")
+}
+
+fun Assert<View>.hasFocusable() = given { actual ->
+  if (actual.hasFocusable()) return@given
+  expected("Expected to have focusable but was not")
+}
+
+fun Assert<View>.isInFocusedWindow() = given { actual ->
+  if (actual.hasWindowFocus()) return@given
+  expected("Expected to be in focused Window but was not")
+}
+
+fun Assert<View>.isNotInFocusedWindow() = given { actual ->
+  if (!actual.hasWindowFocus()) return@given
+  expected("Expected to not be in focused Window but was")
+}
+
+fun Assert<View>.isActivated() = given { actual ->
+  if (actual.isActivated) return@given
+  expected("Expected to be activated but was not")
+}
+
+fun Assert<View>.isNotActivated() = given { actual ->
+  if (!actual.isActivated) return@given
+  expected("Expected to not be activated but was")
+}
+
+fun Assert<View>.isClickable() = given { actual ->
+  if (actual.isClickable) return@given
+  expected("Expected to be clickable but was not")
+}
+
+fun Assert<View>.isNotClickable() = given { actual ->
+  if (!actual.isClickable) return@given
+  expected("Expected to not be clickable but was")
+}
+
+fun Assert<View>.isDirty() = given { actual ->
+  if (actual.isDirty) return@given
+  expected("Expected to be dirty but was not")
+}
+
+fun Assert<View>.isNotDirty() = given { actual ->
+  if (!actual.isDirty) return@given
+  expected("Expected not to be dirty but was")
+}
+
+fun Assert<View>.isUsingDrawingCache() = given { actual ->
+  if (actual.isDrawingCacheEnabled) return@given
+  expected("Expected to use drawing cache but was not")
+}
+
+fun Assert<View>.isNotUsingDrawingCache() = given { actual ->
+  if (!actual.isDrawingCacheEnabled) return@given
+  expected("Expected to not be using drawing cache but was")
+}
+
+fun Assert<View>.isDuplicatingParentState() = given { actual ->
+  if (actual.isDuplicateParentStateEnabled) return@given
+  expected("Expected to be duplicating parent state but was not")
+}
+
+fun Assert<View>.isNotDuplicatingParentState() = given { actual ->
+  if (!actual.isDuplicateParentStateEnabled) return@given
+  expected("Expected to not be duplicating parent state but was")
+}
+
+fun Assert<View>.isEnabled() = given { actual ->
+  if (actual.isEnabled) return@given
+  expected("Expected to be enabled but was disabled")
+}
+
+fun Assert<View>.isDisabled() = given { actual ->
+  if (!actual.isEnabled) return@given
+  expected("Expected to be disabled but was enabled")
+}
+
+fun Assert<View>.isFocusable() = given { actual ->
+  if (actual.isFocusable) return@given
+  expected("Expected to be focusable but was not")
+}
+
+fun Assert<View>.isNotFocusable() = given { actual ->
+  if (!actual.isFocusable) return@given
+  expected("Expected to not be focusable but was")
+}
+
+fun Assert<View>.isFocusableInTouchMode() = given { actual ->
+  if (actual.isFocusableInTouchMode) return@given
+  expected("Expected to be focusable in touch mode but was not")
+}
+
+fun Assert<View>.isNotFocusableInTouchMode() = given { actual ->
+  if (!actual.isFocusableInTouchMode) return@given
+  expected("Expected to not be focusable in touch but was")
+}
+
+
+
 fun visibilityToString(visibility: Int): String {
   return BitmaskUtils.buildNamedValueString(visibility.toLong())
     .value(VISIBLE.toLong(), "visible")
